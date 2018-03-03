@@ -69,9 +69,9 @@ while True:
     amount = result["messages"][1]["placeholders"]["amount"]
     total_collect[which_res % 3] += amount
 
-    print("Collected "+ amount + " " + res["resource_name"])
+    print("Collected "+ str(amount) + " " + res["resource_name"])
     print("Total : ")
-    print("money : " + total_collect[0] + ", supplies : " + total_collect[1] + ", people : " + total_collect[2])
+    print("money : " + str(total_collect[0]) + ", supplies : " + str(total_collect[1]) + ", people : " + str(total_collect[2]))
     print("910 seconds until next capture...")
     index += 1
     which_res += 1
