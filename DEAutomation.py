@@ -66,7 +66,7 @@ while True:
         sleep(910)
         continue
 
-    amount = result["messages"]["placeholders"]["amount"]
+    amount = result["messages"][1]["placeholders"]["amount"]
     total_collect[which_res % 3] += amount
 
     print("Collected "+ amount + " " + res["resource_name"])
