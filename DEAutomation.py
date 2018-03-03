@@ -40,11 +40,11 @@ which_res = 0
 while True:
 
     if which_res % 3 == 0:
-        res = money_list.pop()
+        res = money_list.pop(0)
     elif which_res % 3 == 1:
-        res = supplies_list.pop()
+        res = supplies_list.pop(0)
     else :
-        res = people_list.pop()
+        res = people_list.pop(0)
 
     latitude = res["latitude"]
     longitude = res["longitude"]
