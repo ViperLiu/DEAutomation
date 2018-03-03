@@ -20,16 +20,59 @@ url2 = "https://api.domination.earth/users/capture/"
 r = requests.get(url, headers=header)
 data = json.loads(r.text)
 
-index = 1
+resource_list = data["resource_list"]
+money_list = []
+supplies_list = []
+people_list = []
+total_collect = [0, 0, 0]
+for resource in resource_list:
+    if resource["resource_name"] == "money" :
+        money_list.append(resource)
+    elif resource["resource_name"] == "supplies" :
+        supplies_list.append(resource)
+    else:
+        people_list.append(resource)
+
+
+#messages.placeholders.amount
+index = 0
+which_res = 0
 while True:
 
-    latitude = data["resource_list"][index]["latitude"]
-    longitude = data["resource_list"][index]["longitude"]
+    if which_res % 3 == 0:
+        res = money_list.pop()
+    elif which_res % 3 == 1:
+        res = supplies_list.pop()
+    else :
+        res = people_list.pop()
+
+    latitude = res["latitude"]
+    longitude = res["longitude"]
+
     capture_data = {"country": "TW",
       "location_type": "ROOFTOP",
       "latitude": latitude,
       "longitude": longitude}
-    sleep(930)
+
     r = requests.post(url2, headers=header, json=capture_data)
+    result = json.loads(r.text)
+
     print(r.text)
+
+    if result["code"] == 1:
+        print("Capture successfuly.")
+    else:
+        print("Error! Sleep 910 seconds")
+        sleep(910)
+        continue
+
+    amount = result["messages"]["placeholders"]["amount"]
+    total_collect[which_res % 3] += amount
+
+    print("Collected "+ amount + " " + res["resource_name"])
+    print("Total : ")
+    print("money : " + total_collect[0] + ", supplies : " + total_collect[1] + ", people : " + total_collect[2])
+    print("910 seconds until next capture...")
     index += 1
+    which_res += 1
+    sleep(910)
