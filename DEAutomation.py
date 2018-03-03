@@ -70,9 +70,9 @@ while True:
     total_collect[which_res % 3] += amount
 
     print("Collected "+ str(amount) + " " + res["resource_name"])
-    print("Total : ")
-    print("money : " + str(total_collect[0]) + ", supplies : " + str(total_collect[1]) + ", people : " + str(total_collect[2]))
+    print("Money : " + str(total_collect[0]) + ", Supplies : " + str(total_collect[1]) + ", People : " + str(total_collect[2]))
     print("910 seconds until next capture...")
+    print("-")
     index += 1
     which_res += 1
     sleep(910)
