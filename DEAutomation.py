@@ -57,7 +57,7 @@ while True:
     r = requests.post(url2, headers=header, json=capture_data)
     result = json.loads(r.text)
 
-    print(r.text)
+    #print(r.text)
 
     if result["code"] == 1:
         print("Capture successfuly.")
