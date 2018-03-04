@@ -10,7 +10,7 @@ header = {
 "Content-Type": "application/json",
 "Accept-Encoding": "gzip, deflate",
 "Accept-Language": "zh-TW,en-US;q=0.9",
-"Cookie": "AWSALB=PCfEYFJ/WdVzdOtuGtCxuz/huhzPhbLFA6Ir5nDduPzSiRX6xEAbbkXKzM2aTnBnYu3hv1wF/chhY5X91AXFjV3JLawVji+b6FncYzs6xkcsBPKE9Qf/poVJnuVV",
+"Cookie": "AWSALB=NzDsooZO5mqJ4SxCmZdrPrNMT0UnzNyguYMZb6+NE68bwstRk+2sgCt9sBSHJuDorQ9nW7HnsV5mPlLRSc/2GJKw2HmrNOB3iI7TtmRZMW4w95Er1C90iTkLDd3BKE9Qf/poVJnuVV",
 "X-Requested-With": "earth.domination"}
 
 #'latitude': 24.896989, 'longitude': 121.256611
@@ -42,7 +42,7 @@ while True:
     if which_res % 3 == 0:
         res = money_list.pop(0)
     elif which_res % 3 == 1:
-        res = supplies_list.pop(0)
+        res = people_list.pop(0)
     else :
         res = people_list.pop(0)
 
