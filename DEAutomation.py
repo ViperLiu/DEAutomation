@@ -2,7 +2,7 @@ import requests
 import json
 from time import sleep
 
-url = "https://api.domination.earth/users/earth_lands/?latitude=24.909509&longitude=121.2863121&tracking_id=0&placement_id=0"
+url = "https://api.domination.earth/users/earth_lands/?latitude=24.9535038&longitude=121.1646698&tracking_id=0&placement_id=0"
 header = {
 "Accept": "application/json",
 "Authorization": "Token f021a316cc607130385fc74ed49410d57a6d3f54",
@@ -24,6 +24,9 @@ resource_list = data["resource_list"]
 money_list = []
 supplies_list = []
 people_list = []
+
+
+
 total_collect = [0, 0, 0]
 for resource in resource_list:
     if resource["resource_name"] == "money" :
@@ -33,18 +36,23 @@ for resource in resource_list:
     else:
         people_list.append(resource)
 
+print("Found " + str(len(money_list)) + " money, " + str(len(supplies_list)) + "supplies, " + str(len(people_list)) + " people")
 
 #messages.placeholders.amount
 index = 0
 which_res = 0
 while True:
 
-    if which_res % 3 == 0:
+    try:
+        if which_res % 3 == 0:
+            res = money_list.pop(0)
+        elif which_res % 3 == 1:
+            res = people_list.pop(0)
+        else :
+            res = people_list.pop(0)
+
+    except:
         res = money_list.pop(0)
-    elif which_res % 3 == 1:
-        res = people_list.pop(0)
-    else :
-        res = people_list.pop(0)
 
     latitude = res["latitude"]
     longitude = res["longitude"]
