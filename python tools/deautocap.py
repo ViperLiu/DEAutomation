@@ -18,14 +18,14 @@ while True:
     capture_data = {
       "country": "TW",
       "location_type": "GEOMETRIC_CENTER",
-      "latitude": 24.9535677,
-      "longitude": 121.1648077
+      "latitude": 24.909830,
+      "longitude": 121.282080
     }
 
     r = requests.post(url2, headers=header, json=capture_data)
     result = json.loads(r.text)
 
-    #print(r.text)
+    print(r.text)
 
     if result["code"] == 1:
         print("Capture successfuly.")
