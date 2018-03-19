@@ -21,20 +21,33 @@ url2 = "https://api.domination.earth/construction/repair/"
 
 
 #messages.placeholders.amount
+capture_data = {#base
+  "id": 50605}
+
+capture_data2 = {#home
+  "id": 60164}
+
+capture_data3 = {#office
+  "id": 50961}
 index = 0
 which_res = 0
-
+repair_list = []
+repair_list.append(capture_data)
+repair_list.append(capture_data2)
+repair_list.append(capture_data3)
 while True:
 
-    capture_data = {
-      "id": 60164}
+    try:
+        for i in range(3):
+            print("Repair " + str(i))
+            r = requests.post(url2, headers=header, json=repair_list[i])
+            result = json.loads(r.text)
+            sleep(7)
+    except:
+        print("Something wrong with " + str(i) + "...")
 
-    r = requests.post(url2, headers=header, json=capture_data)
-    result = json.loads(r.text)
-
-    print(r.text)
     print("Repair successfuly.")
     print("-")
     index += 1
     which_res += 1
-    sleep(600)
+    sleep(540)
