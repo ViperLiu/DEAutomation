@@ -2,15 +2,15 @@ import requests
 import json
 from time import sleep
 
-url = "https://api.domination.earth/users/earth_lands/?latitude=24.909026&longitude=121.286592&tracking_id=0&placement_id=0"
+url = "https://api.domination.earth/users/earth_lands/?latitude=23.970106&longitude=120.942923&tracking_id=0&placement_id=0"
 header = {
 "Accept": "application/json",
-"Authorization": "Token f021a316cc607130385fc74ed49410d57a6d3f54",
-"User-Agent": "Mozilla/5.0 (Linux; Android 6.0.1; HTC_M8Sx Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/64.0.3282.137 Mobile Safari/537.36",
+"Authorization": "Token 871372bb4ecfeefdab9761fe96daf5a257bfd80d",
+"User-Agent": "Mozilla/5.0 (Linux; Android 6.0.1; SM-G900I Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/63.0.3239.111 Mobile Safari/537.36",
 "Content-Type": "application/json",
 "Accept-Encoding": "gzip, deflate",
 "Accept-Language": "zh-TW,en-US;q=0.9",
-"Cookie": "AWSALB=NzDsooZO5mqJ4SxCmZdrPrNMT0UnzNyguYMZb6+NE68bwstRk+2sgCt9sBSHJuDorQ9nW7HnsV5mPlLRSc/2GJKw2HmrNOB3iI7TtmRZMW4w95Er1C90iTkLDd3BKE9Qf/poVJnuVV",
+"Cookie": "AWSALB=/9kVI1jCzbpeydBXYYRBdj0bVCiWSkAmxlj9ZTaog237yBKRbyBb/l/qD/61lb7CSf24tabe1Fe6B6L8WIYzDeTGCse8Dz5pwKe9Pzo09Ix/fS4ruUyxoR+MYODI",
 "X-Requested-With": "earth.domination"}
 
 #'latitude': 24.896989, 'longitude': 121.256611
@@ -43,19 +43,19 @@ supplies_list = sorted(supplies_list, key=lambda x: x["amount"], reverse=True)
 people_list = sorted(people_list, key=lambda x: x["amount"], reverse=True)
 
 
-
 #messages.placeholders.amount
 index = 0
 which_res = 0
+
 while True:
 
     try:
         if which_res % 3 == 0:
-            res = money_list.pop(0)
+            res = people_list.pop(0)
         elif which_res % 3 == 1:
-            res = money_list.pop(0)
+            res = supplies_list.pop(0)
         else :
-            res = money_list.pop(0)
+            res = people_list.pop(0)
 
     except:
         res = money_list.pop(0)
@@ -76,7 +76,7 @@ while True:
     if result["code"] == 1:
         print("Capture successfuly.")
     else:
-        print("Error! Sleep 910 seconds")
+        print("Error! Sleep 905 seconds")
         sleep(905)
         continue
 

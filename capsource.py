@@ -24,25 +24,22 @@ resource_list = data["resource_list"]
 money_list = []
 supplies_list = []
 people_list = []
+source_list = []
 
 
 
 total_collect = [0, 0, 0]
 for resource in resource_list:
-    if resource["resource_name"] == "money" :
+    if resource["is_source"] == True:
+        source_list.append(resource)
+    elif resource["resource_name"] == "money":
         money_list.append(resource)
-    elif resource["resource_name"] == "supplies" :
+    elif resource["resource_name"] == "supplies":
         supplies_list.append(resource)
-    else:
+    elif resource["resource_name"] == "people":
         people_list.append(resource)
 
-print("Found " + str(len(money_list)) + " money, " + str(len(supplies_list)) + "supplies, " + str(len(people_list)) + " people")
-print("Sorting lists...")
-money_list = sorted(money_list, key=lambda x: x["amount"], reverse=True)
-supplies_list = sorted(supplies_list, key=lambda x: x["amount"], reverse=True)
-people_list = sorted(people_list, key=lambda x: x["amount"], reverse=True)
-
-
+print("Found " + str(len(money_list)) + " money, " + str(len(supplies_list)) + " supplies, " + str(len(people_list)) + " people, " + str(len(source_list)) + " source")
 
 #messages.placeholders.amount
 index = 0
@@ -50,15 +47,11 @@ which_res = 0
 while True:
 
     try:
-        if which_res % 3 == 0:
-            res = money_list.pop(0)
-        elif which_res % 3 == 1:
-            res = money_list.pop(0)
-        else :
-            res = money_list.pop(0)
-
+        res = source_list.pop(0)
+        print("Capture source.")
     except:
-        res = money_list.pop(0)
+        res = people_list.pop(0)
+        print("Capture people.")
 
     latitude = res["latitude"]
     longitude = res["longitude"]
@@ -71,25 +64,25 @@ while True:
     r = requests.post(url2, headers=header, json=capture_data)
     result = json.loads(r.text)
 
-    print(r.text)
+    #print(r.text)
 
     if result["code"] == 1:
         print("Capture successfuly.")
     else:
         print("Error! Sleep 910 seconds")
-        sleep(905)
+        sleep(910)
         continue
 
     try:
         amount = result["messages"][1]["placeholders"]["amount"]
         total_collect[which_res % 3] += amount
+        print("Collected "+ str(amount) + " " + res["resource_name"])
+        print("Money : " + str(total_collect[0]) + ", Supplies : " + str(total_collect[1]) + ", People : " + str(total_collect[2]))
     except:
         print("OK")
-
-    print("Collected "+ str(amount) + " " + res["resource_name"])
-    print("Money : " + str(total_collect[0]) + ", Supplies : " + str(total_collect[1]) + ", People : " + str(total_collect[2]))
+        
     print("910 seconds until next capture...")
     print("-")
     index += 1
     which_res += 1
-    sleep(905)
+    sleep(910)
